@@ -444,13 +444,11 @@ func analyseControllerPkg(vendorPath, localName, pkgpath string) {
 		if len(gopaths) == 0 {
 			beeLogger.Log.Fatal("GOPATH environment variable is not set or empty")
 		}
-		//首先去vendor目录里面去找源码
 		wg, _ := filepath.EvalSymlinks(filepath.Join(vendorPath, pkgpath))
 		if utils.FileExists(wg) {
 			pkgRealpath = wg
 		} else {
 			wgopath := gopaths
-			// 然后去gopath下面去找代码
 			for _, wg := range wgopath {
 				wg, _ = filepath.EvalSymlinks(filepath.Join(wg, "src", pkgpath))
 				if utils.FileExists(wg) {
